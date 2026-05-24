@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCINT 2026 | Breaking the Speed-Brightness Tradeoff in Nanocomposite Scintillators</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0f1117;
+    --ink-muted: #4a4e5a;
+    --ink-faint: #9198a8;
+    --surface: #f7f6f2;
+    --white: #ffffff;
+    --accent: #1a3a5c;
+    --accent-light: #e8eef5;
+    --gold: #b8860b;
+    --gold-light: #fdf8ee;
+    --border: #dddbd4;
+    --border-strong: #b8b4aa;
+    --font-display: 'EB Garamond', Georgia, serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--surface);
+    color: var(--ink);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* ── Header bar ── */
+  .topbar {
+    background: var(--accent);
+    color: #fff;
+    padding: 10px 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .topbar-left { opacity: 0.75; }
+  .topbar-right { display: flex; gap: 1.5rem; }
+  .topbar a { color: #fff; text-decoration: none; opacity: 0.75; transition: opacity 0.2s; }
+  .topbar a:hover { opacity: 1; }
+
+  /* ── Hero ── */
+  .hero {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 5rem 2rem 4rem;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .conference-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gold-light);
+    border: 1px solid #d4b96a;
+    border-radius: 2px;
+    padding: 5px 14px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.8rem;
+  }
+  .conference-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    max-width: 780px;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .meta-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .meta-value {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  /* ── Main layout ── */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  section {
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.2rem;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 15px;
+    color: var(--ink-muted);
+    line-height: 1.75;
+    max-width: 680px;
+  }
+
+  /* ── Join session CTA ── */
+  .session-card {
+    background: var(--accent);
+    border-radius: 4px;
+    padding: 2rem 2.5rem;
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .session-info { color: #fff; }
+  .session-info .label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 6px;
+  }
+  .session-info .time {
+    font-size: 22px;
+    font-family: var(--font-display);
+    font-weight: 600;
+  }
+  .session-info .date {
+    font-size: 13px;
+    opacity: 0.75;
+    margin-top: 4px;
+  }
+  .session-info .dial {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    opacity: 0.55;
+    margin-top: 8px;
+  }
+
+  .join-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    color: var(--accent);
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .join-btn:hover { background: var(--accent-light); transform: translateY(-1px); }
+  .join-btn svg { width: 16px; height: 16px; }
+
+  /* ── About / bio ── */
+  .bio-grid {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 2rem;
+    align-items: start;
+    margin-top: 1rem;
+  }
+  @media (max-width: 560px) {
+    .bio-grid { grid-template-columns: 1fr; }
+  }
+  .avatar-placeholder {
+    width: 90px; height: 90px;
+    border-radius: 2px;
+    background: var(--accent-light);
+    border: 1px solid var(--border-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--accent);
+    letter-spacing: 1px;
+  }
+  .bio-name {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .bio-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+
+  /* ── Paper link ── */
+  .paper-card {
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    background: var(--white);
+    padding: 1.25rem 1.5rem;
+    border-radius: 0 2px 2px 0;
+    margin-top: 1rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    transition: border-color 0.2s;
+  }
+  .paper-card:hover { border-left-color: var(--gold); }
+  .paper-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .paper-journal {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+  .paper-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    white-space: nowrap;
+    padding: 6px 12px;
+    border: 1px solid var(--border-strong);
+    border-radius: 2px;
+    transition: background 0.15s;
+  }
+  .paper-link:hover { background: var(--accent-light); }
+
+  /* ── Contact ── */
+  .contact-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 10px 16px;
+    border-radius: 2px;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 14px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .contact-item:hover { border-color: var(--accent); background: var(--accent-light); }
+  .contact-icon {
+    width: 18px; height: 18px;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* ── Footer ── */
+  footer {
+    padding: 2rem;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.05em;
+    border-top: 1px solid var(--border);
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* ── Animations ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="topbar-left">SCINT 2026 &mdash; International Conference on Scintillating Materials &amp; Their Applications</span>
+  <div class="topbar-right">
+    <a href="#session">Join Session</a>
+    <a href="#about">About</a>
+    <a href="#paper">Paper</a>
+    <a href="#contact">Contact</a>
+  </div>
+</div>
+
+<div style="background: var(--white);">
+  <div class="hero container fade-in">
+    <div class="conference-badge">SCINT 2026 &mdash; Poster Presentation</div>
+    <h1>Breaking the Speed&#8209;Brightness Tradeoff in Nanocomposite Scintillators</h1>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <span class="meta-label">Presenter</span>
+        <span class="meta-value">Xiaohe Zhou</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Affiliation</span>
+        <span class="meta-value">University of Milano-Bicocca</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Session date</span>
+        <span class="meta-value">Tuesday, 27 May 2025 &mdash; 8:45&ndash;12:15 CEST</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Location</span>
+        <span class="meta-value">Remote (Google Meet)</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Join session -->
+  <section id="session" class="fade-in delay-1">
+    <div class="section-label">Live session</div>
+    <h2>Attend the presentation remotely</h2>
+    <p>I am presenting this poster remotely. Scan the QR code on the poster or click below to join the discussion live.</p>
+    <div class="session-card">
+      <div class="session-info">
+        <div class="label">Google Meet &mdash; Live Q&amp;A</div>
+        <div class="time">8:45 – 12:15 CEST</div>
+        <div class="date">Tuesday, 27 May 2025</div>
+        <div class="dial">Dial (IT): +39 02 3041 9545 &nbsp;·&nbsp; PIN: 542 433 565#</div>
+      </div>
+      <a class="join-btn" href="https://meet.google.com/kij-ijgk-xgy" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 10l4.553-2.07A1 1 0 0121 8.845v6.31a1 1 0 01-1.447.894L15 14"/>
+          <rect x="3" y="8" width="12" height="8" rx="2"/>
+        </svg>
+        Join on Google Meet
+      </a>
+    </div>
+  </section>
+
+  <!-- Abstract -->
+  <section id="abstract" class="fade-in delay-2">
+    <div class="section-label">Abstract</div>
+    <h2>Research overview</h2>
+    <p>
+      Scintillators convert ionising radiation into visible light and are critical for medical imaging, high-energy physics, and security screening. Conventional inorganic scintillators face a fundamental tension: fast decay kinetics typically come at the cost of light yield, limiting sensitivity and resolution simultaneously.
+    </p>
+    <br>
+    <p>
+      This work explores nanocomposite architectures — combining semiconductor quantum dots with structured host matrices — as a route to decouple radiative rate from photon output. By engineering energy-transfer pathways at the nanoscale and exploiting Förster-type coupling between emitter populations, we demonstrate that sub-nanosecond timing can be achieved without sacrificing brightness. These findings open new material design strategies for next-generation scintillators, with direct relevance to precision medicine applications supported by the HEAL ITALIA project.
+    </p>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="fade-in delay-2">
+    <div class="section-label">Presenter</div>
+    <h2>About</h2>
+    <div class="bio-grid">
+      <img src="profile.JPG" alt="Xiaohe Zhou" style="width:90px;height:90px;object-fit:cover;object-position:center top;border-radius:2px;border:1px solid var(--border-strong);">
+      <div>
+        <div class="bio-name">Xiaohe Zhou</div>
+        <div class="bio-title">Ph.D. &nbsp;·&nbsp; Postdoctoral Researcher &nbsp;·&nbsp; University of Milano-Bicocca</div>
+        <p>
+          Xiaohe works in the group of Prof. Sergio Brovelli, focusing on ultrafast scintillation mechanisms and new material platforms for next-generation scintillators. She holds a bachelor's degree in theoretical physics from the Chinese University of Hong Kong and a master's and Ph.D. in optics physics from the University of Texas at Dallas, where her doctoral research illuminated ultrafast charge recombination in nanocrystal quantum dots. Since 2023 she has been funded by the HEAL ITALIA project to develop innovative scintillating materials for precision medicine.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Paper -->
+  <section id="paper" class="fade-in delay-3">
+    <div class="section-label">Publication</div>
+    <h2>Related work</h2>
+    <p>This presentation is accompanied by a peer-reviewed publication in <em>Advanced Materials</em>:</p>
+    <div class="paper-card">
+      <div>
+        <div class="paper-title">Breaking the Speed-Brightness Tradeoff in Nanocomposite Scintillators</div>
+        <div class="paper-journal">Advanced Materials &nbsp;·&nbsp; Wiley &nbsp;·&nbsp; 2025</div>
+      </div>
+      <a class="paper-link" href="https://advanced.onlinelibrary.wiley.com/doi/10.1002/adma.202513469" target="_blank">
+        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+          <polyline points="15 3 21 3 21 9"/>
+          <line x1="10" y1="14" x2="21" y2="3"/>
+        </svg>
+        Read paper
+      </a>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="fade-in delay-4">
+    <div class="section-label">Contact</div>
+    <h2>Get in touch</h2>
+    <p>Questions about the research or the session? Reach out directly.</p>
+    <div class="contact-grid">
+      <a class="contact-item" href="mailto:xiaohe.zhou@unimib.it">
+        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+        xiaohe.zhou@unimib.it
+      </a>
+      <a class="contact-item" href="https://www.linkedin.com/in/xiaohe-zhou-1a8892244" target="_blank">
+        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/>
+          <rect x="2" y="9" width="4" height="12"/>
+          <circle cx="4" cy="4" r="2"/>
+        </svg>
+        LinkedIn profile
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  Xiaohe Zhou &nbsp;·&nbsp; SCINT 2026 &nbsp;·&nbsp; University of Milano-Bicocca &nbsp;·&nbsp; HEAL ITALIA
+</footer>
+
+</body>
+</html>
