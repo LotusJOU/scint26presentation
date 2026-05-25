@@ -246,6 +246,14 @@
     color: var(--accent);
     letter-spacing: 1px;
   }
+  .profile-image {
+    width: 90px;
+    height: 90px;
+    border-radius: 2px;
+    border: 1px solid var(--border-strong);
+    object-fit: contain;
+    background: var(--white);
+  }
   .bio-name {
     font-family: var(--font-display);
     font-size: 1.4rem;
@@ -517,7 +525,7 @@
     <div class="section-label">Presenter</div>
     <h2>About</h2>
     <div class="bio-grid">
-      <img src="profile.JPG" alt="Xiaohe Zhou" style="width:90px;height:90px;object-fit:cover;object-position:center top;border-radius:2px;border:1px solid var(--border-strong);">
+      <img src="profile.JPG" alt="Xiaohe Zhou" class="profile-image">
       <div>
         <div class="bio-name">Xiaohe Zhou</div>
         <div class="bio-title">Ph.D. &nbsp;·&nbsp; Postdoctoral Researcher &nbsp;·&nbsp; University of Milano-Bicocca</div>
