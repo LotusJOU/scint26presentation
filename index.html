@@ -335,6 +335,79 @@
     flex-shrink: 0;
   }
 
+  /* ── Message Form ── */
+  .message-form {
+    margin-top: 1.5rem;
+    max-width: 600px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 500;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(26, 58, 92, 0.1);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: var(--font-body);
+  }
+
+  .submit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 2px;
+    border: none;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .submit-btn:hover {
+    background: #143050;
+    transform: translateY(-1px);
+  }
+
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+
   /* ── Footer ── */
   footer {
     padding: 2rem;
@@ -361,6 +434,7 @@
   .delay-2 { animation-delay: 0.2s; }
   .delay-3 { animation-delay: 0.3s; }
   .delay-4 { animation-delay: 0.4s; }
+  .delay-5 { animation-delay: 0.5s; }
 </style>
 </head>
 <body>
@@ -371,6 +445,7 @@
     <a href="#session">Join Session</a>
     <a href="#about">About</a>
     <a href="#paper">Paper</a>
+    <a href="#message">Send Message</a>
     <a href="#contact">Contact</a>
   </div>
 </div>
@@ -429,11 +504,11 @@
     <div class="section-label">Abstract</div>
     <h2>Research overview</h2>
     <p>
-      Scintillators convert ionising radiation into visible light and are critical for medical imaging, high-energy physics, and security screening. Conventional inorganic scintillators face a fundamental tension: fast decay kinetics typically come at the cost of light yield, limiting sensitivity and resolution simultaneously.
+      Scintillators convert ionising radiation into visible light and are critical for medical imaging, high-energy physics, and security screening. Conventional inorganic scintillators face a fu[...]
     </p>
     <br>
     <p>
-      This work explores nanocomposite architectures — combining semiconductor quantum dots with structured host matrices — as a route to decouple radiative rate from photon output. By engineering energy-transfer pathways at the nanoscale and exploiting Förster-type coupling between emitter populations, we demonstrate that sub-nanosecond timing can be achieved without sacrificing brightness. These findings open new material design strategies for next-generation scintillators, with direct relevance to precision medicine applications supported by the HEAL ITALIA project.
+      This work explores nanocomposite architectures — combining semiconductor quantum dots with structured host matrices — as a route to decouple radiative rate from photon output. By engine[...]
     </p>
   </section>
 
@@ -447,7 +522,7 @@
         <div class="bio-name">Xiaohe Zhou</div>
         <div class="bio-title">Ph.D. &nbsp;·&nbsp; Postdoctoral Researcher &nbsp;·&nbsp; University of Milano-Bicocca</div>
         <p>
-          Xiaohe works in the group of Prof. Sergio Brovelli, focusing on ultrafast scintillation mechanisms and new material platforms for next-generation scintillators. She holds a bachelor's degree in theoretical physics from the Chinese University of Hong Kong and a master's and Ph.D. in optics physics from the University of Texas at Dallas, where her doctoral research illuminated ultrafast charge recombination in nanocrystal quantum dots. Since 2023 she has been funded by the HEAL ITALIA project to develop innovative scintillating materials for precision medicine.
+          Xiaohe works in the group of Prof. Sergio Brovelli, focusing on ultrafast scintillation mechanisms and new material platforms for next-generation scintillators. She holds a bachelor's d[...]
         </p>
       </div>
     </div>
@@ -474,8 +549,33 @@
     </div>
   </section>
 
+  <!-- Message Form -->
+  <section id="message" class="fade-in delay-4">
+    <div class="section-label">Message</div>
+    <h2>Send a message</h2>
+    <p>Have a question or want to discuss the research? Fill out the form below and I'll get back to you soon.</p>
+    <form class="message-form" action="https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID" method="POST">
+      <div class="form-group">
+        <label for="name">Name *</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Your Message *</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      
+      <button type="submit" class="submit-btn">Send Message</button>
+    </form>
+  </section>
+
   <!-- Contact -->
-  <section id="contact" class="fade-in delay-4">
+  <section id="contact" class="fade-in delay-5">
     <div class="section-label">Contact</div>
     <h2>Get in touch</h2>
     <p>Questions about the research or the session? Reach out directly.</p>
